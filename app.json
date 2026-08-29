@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Dynasty",
+    "slug": "dynasty-mobile",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": { "backgroundColor": "#F8F5EF" },
+    "ios": { "supportsTablet": false, "bundleIdentifier": "com.loann.dynasty" },
+    "android": { "package": "com.loann.dynasty", "adaptiveIcon": { "backgroundColor": "#F8F5EF" } },
+    "plugins": []
+  }
+}
