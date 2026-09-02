@@ -7,7 +7,8 @@
     "start": "expo start",
     "ios": "expo start --ios",
     "android": "expo start --android",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "snack": "node scripts/build-snack.mjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.10",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "esbuild": "^0.28.0"
   }
 }

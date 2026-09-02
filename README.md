@@ -27,16 +27,9 @@ Le contrôle TypeScript et la création du bundle iOS passent sans erreur.
 
 ## Tester dans Expo Go
 
-1. Installer Expo Go sur l’iPhone.
-2. Mettre ce projet dans un dépôt GitHub depuis l’application GitHub ou github.com.
-3. Importer le dépôt dans snack.expo.dev, ou connecter le dépôt à un environnement cloud Expo.
-4. Ouvrir le QR Code avec l’iPhone.
-
-Pour un vrai build TestFlight sans Mac, connecter ensuite un compte Expo puis lancer :
-
-    npx eas-cli build --platform ios --profile preview
-
-Apple exige un compte Apple Developer pour TestFlight. Aucun ordinateur local n’est nécessaire : le build est réalisé dans le cloud.
+La marche a suivre complete, depuis l'iPhone et sans ordinateur, est dans
+`TESTER.md` : un lien permanent ouvre le jeu dans Expo Go, et deposer un `.zip`
+sur GitHub suffit a publier une nouvelle version.
 
 ## Organisation
 

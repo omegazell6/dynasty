@@ -10,11 +10,11 @@
 - mort et héritier ;
 - fin de partie et score ;
 - sauvegarde locale ;
-- bundle iOS validé.
+- bundle iOS validé ;
+- chaîne de test iPhone : lien Expo Go permanent et envoi de zip par GitHub.
 
 ## Prochaine étape
 
-- publier le dépôt dans un environnement cloud accessible depuis l’iPhone ;
 - effectuer le premier test tactile réel dans Expo Go ;
 - corriger l’équilibrage après une run complète ;
 - remplacer progressivement les avatars temporaires par un petit pack cohérent ;

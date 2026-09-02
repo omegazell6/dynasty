@@ -1,0 +1,73 @@
+name: Expo Go
+
+# Reconstruit le bundle Snack a chaque envoi de code, et deballe au passage
+# tout .zip depose depuis l'iPhone. Voir TESTER.md.
+on:
+  push:
+    branches: [main, 'claude/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: expo-go-${{ github.ref }}
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Deballer le zip envoye depuis l'iPhone
+        run: node scripts/apply-zip.mjs
+
+      - name: Installer les dependances
+        run: npm install --no-audit --no-fund
+
+      - name: Verification TypeScript
+        id: typecheck
+        run: |
+          if npm run typecheck; then
+            echo "ok=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=non" >> "$GITHUB_OUTPUT"
+            echo "::warning::La verification TypeScript echoue. Le bundle est quand meme publie."
+          fi
+
+      - name: Construire le bundle Snack
+        id: snack
+        run: npm run snack
+        env:
+          SNACK_REPO: ${{ github.repository }}
+          SNACK_BRANCH: ${{ github.ref_name }}
+
+      - name: Publier le bundle
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Rien de nouveau a publier."
+          else
+            git commit -m "Bundle Expo Go a jour"
+            git push
+          fi
+
+      - name: Lien de test
+        run: |
+          {
+            echo "## Tester dans Expo Go"
+            echo
+            echo "TypeScript : ${{ steps.typecheck.outputs.ok }}"
+            echo
+            echo "[Ouvrir la derniere version](${{ steps.snack.outputs.fresh_url }})"
+            echo
+            echo "Lien permanent a garder en favori :"
+            echo
+            echo "[Dynasty dans Expo Go](${{ steps.snack.outputs.stable_url }})"
+          } >> "$GITHUB_STEP_SUMMARY"
